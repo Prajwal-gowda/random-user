@@ -1,15 +1,12 @@
 import { useContext } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import UserList from "../components/UserList";
 import { UsersContext } from "../context/UsersContext";
 
 const AllUsers = () => {
   const { users } = useContext(UsersContext);
 
-  return (
-    <View>
-      <Text>all users page</Text>
-    </View>
-  );
+  return <UserList userListInfo={users} />;
 };
 
 export default AllUsers;
