@@ -1,7 +1,7 @@
 import { useContext, useLayoutEffect, useState } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Button } from "react-native";
 import { UsersContext } from "../context/UsersContext";
-import { getSelectedUserData } from "../utils/utils";
+import { getFormattedName, getSelectedUserData } from "../utils/utils";
 
 const UserDetail = ({ route, navigation }) => {
   const { users } = useContext(UsersContext);
@@ -18,15 +18,28 @@ const UserDetail = ({ route, navigation }) => {
     }
   }, [route.params]);
 
+  const viewLocationHandler = () => {
+    navigation.navigate("MapView", {
+      latitude: selectedUser.location.coordinates.latitude,
+      longitude: selectedUser.location.coordinates.longitude,
+    });
+  };
+
   return (
     <View style={styles.rootContainer}>
       {selectedUser && (
-        <View style={styles.imageContainer}>
-          <Image
-            style={styles.image}
-            source={{ uri: selectedUser.picture.large }}
-          />
-        </View>
+        <>
+          <View style={styles.imageContainer}>
+            <Image
+              style={styles.image}
+              source={{ uri: selectedUser.picture.large }}
+            />
+          </View>
+          <Text style={styles.title}>
+            {getFormattedName(selectedUser.name)}
+          </Text>
+          <Button title="View location" onPress={viewLocationHandler} />
+        </>
       )}
     </View>
   );
@@ -45,10 +58,17 @@ const styles = StyleSheet.create({
     height: 300,
     borderRadius: 150,
     overflow: "hidden",
+    marginVertical: 16,
   },
 
   image: {
     width: "100%",
     height: "100%",
+  },
+
+  title: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "white",
   },
 });

@@ -1,16 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
+import { Colors } from "../utils/colors";
+import { getDateSubstring, getFormattedName } from "../utils/utils";
 
-const UserCard = ({
-  name,
-  location,
-  email,
-  dob,
-  phone,
-  id,
-  picture,
-  login,
-}) => {
+const UserCard = ({ name, location, email, dob, phone, picture, login }) => {
   const navigation = useNavigation();
 
   const userCardPressHandler = () => {
@@ -27,7 +20,14 @@ const UserCard = ({
         <View style={styles.InfoContainer}>
           <Image style={styles.image} source={{ uri: picture.large }} />
           <View style={styles.details}>
-            <Text style={styles.detailItem}>{name.first}</Text>
+            <Text style={styles.title}>{getFormattedName(name)}</Text>
+            <Text style={[styles.detailItem]}>
+              {getDateSubstring(dob.date)}
+            </Text>
+            <Text style={[styles.detailItem]}>
+              {location.street.number} {location.street.name}
+            </Text>
+            <Text style={[styles.detailItem]}>{phone}</Text>
           </View>
         </View>
       </Pressable>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    height: 150,
+    height: "100%",
     flex: 1.5,
   },
 
@@ -66,17 +66,20 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: "bold",
-    margin: 8,
     textAlign: "center",
+    marginBottom: 8,
   },
 
   details: {
-    padding: 8,
+    margin: 16,
     flex: 2,
+    alignItems: "flex-start",
   },
 
   detailItem: {
-    marginHorizontal: 4,
-    fontSize: 12,
+    marginVertical: 4,
+    fontSize: 14,
+    color: Colors.grey700,
+    fontWeight: "bold",
   },
 });
