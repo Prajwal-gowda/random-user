@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import { Colors } from "../utils/colors";
-import { getDateSubstring, getFormattedName } from "../utils/utils";
+import { getFormattedName } from "../utils/utils";
 
 const UserCard = ({ name, location, email, dob, phone, picture, login }) => {
   const navigation = useNavigation();
@@ -21,9 +21,7 @@ const UserCard = ({ name, location, email, dob, phone, picture, login }) => {
           <Image style={styles.image} source={{ uri: picture.large }} />
           <View style={styles.details}>
             <Text style={styles.title}>{getFormattedName(name)}</Text>
-            <Text style={[styles.detailItem]}>
-              {getDateSubstring(dob.date)}
-            </Text>
+            <Text style={[styles.detailItem]}>{dob.age} yrs</Text>
             <Text style={[styles.detailItem]}>
               {location.street.number} {location.street.name}
             </Text>

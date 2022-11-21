@@ -1,7 +1,13 @@
 import { useContext, useLayoutEffect, useState } from "react";
-import { View, Text, StyleSheet, Image, Button } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
+import OutlineButton from "../components/OutlineButton";
 import { UsersContext } from "../context/UsersContext";
-import { getFormattedName, getSelectedUserData } from "../utils/utils";
+import { Colors } from "../utils/colors";
+import {
+  getDateSubstring,
+  getFormattedName,
+  getSelectedUserData,
+} from "../utils/utils";
 
 const UserDetail = ({ route, navigation }) => {
   const { users } = useContext(UsersContext);
@@ -26,7 +32,7 @@ const UserDetail = ({ route, navigation }) => {
   };
 
   return (
-    <View style={styles.rootContainer}>
+    <ScrollView contentContainerStyle={styles.rootContainer}>
       {selectedUser && (
         <>
           <View style={styles.imageContainer}>
@@ -38,10 +44,41 @@ const UserDetail = ({ route, navigation }) => {
           <Text style={styles.title}>
             {getFormattedName(selectedUser.name)}
           </Text>
-          <Button title="View location" onPress={viewLocationHandler} />
+          <View style={styles.infoContainer}>
+            <Text style={styles.subTitle}>D.O.B : </Text>
+            <Text style={styles.infoItem}>
+              {getDateSubstring(selectedUser.dob.date)}
+            </Text>
+          </View>
+
+          <View style={styles.infoContainer}>
+            <Text style={styles.subTitle}>Phone : </Text>
+            <Text style={styles.infoItem}>{selectedUser.phone}</Text>
+          </View>
+
+          <View style={styles.infoContainer}>
+            <Text style={styles.subTitle}>Email : </Text>
+            <Text style={styles.infoItem}>{selectedUser.email}</Text>
+          </View>
+
+          <View style={styles.infoContainer}>
+            <Text style={styles.subTitle}>Address : </Text>
+            <Text style={styles.infoItem}>
+              {selectedUser.location.street.number}{" "}
+              {selectedUser.location.street.name}
+            </Text>
+          </View>
+
+          <OutlineButton
+            title="View Location"
+            onPress={viewLocationHandler}
+            icon="map"
+            color={Colors.primary500}
+            size={16}
+          />
         </>
       )}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -49,8 +86,8 @@ export default UserDetail;
 
 const styles = StyleSheet.create({
   rootContainer: {
-    justifyContent: "center",
     alignItems: "center",
+    marginBottom: 12,
   },
 
   imageContainer: {
@@ -67,8 +104,25 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: "bold",
     color: "white",
+  },
+
+  infoContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    maxWidth: 400,
+    marginVertical: 4,
+    overflow: "hidden",
+  },
+  subTitle: {
+    fontSize: 18,
+    color: Colors.primary500,
+  },
+  infoItem: {
+    fontSize: 16,
+    color: Colors.grey100,
   },
 });
