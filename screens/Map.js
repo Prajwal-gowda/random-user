@@ -1,5 +1,5 @@
 import MapView, { Marker } from "react-native-maps";
-import { Alert, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
 
 const Map = ({ route }) => {
@@ -21,7 +21,7 @@ const Map = ({ route }) => {
   }, [route.params]);
 
   return (
-    <MapView initialRegion={region} style={styles.mapView} zoomControlEnabled>
+    <MapView region={region} style={styles.mapView} zoomControlEnabled>
       {route.params && (
         <Marker
           coordinate={{

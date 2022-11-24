@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 import UserCard from "./UserCard";
 
 const UserList = ({ userListInfo }) => {

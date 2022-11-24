@@ -10,3 +10,6 @@ export const getDateSubstring = (isoDate) => isoDate.substr(0, 10);
 
 export const getFormattedName = (name) =>
   `${name.title}. ${name.first} ${name.last}`;
+
+export const getFormattedAddress = (location) =>
+  `${location.street.number} ${location.street.name}`;

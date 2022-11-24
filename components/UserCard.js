@@ -1,9 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import { Colors } from "../utils/colors";
-import { getFormattedName } from "../utils/utils";
+import { getFormattedAddress, getFormattedName } from "../utils/utils";
 
-const UserCard = ({ name, location, email, dob, phone, picture, login }) => {
+const UserCard = ({ name, location, dob, phone, picture, login }) => {
   const navigation = useNavigation();
 
   const userCardPressHandler = () => {
@@ -23,7 +23,7 @@ const UserCard = ({ name, location, email, dob, phone, picture, login }) => {
             <Text style={styles.title}>{getFormattedName(name)}</Text>
             <Text style={[styles.detailItem]}>{dob.age} yrs</Text>
             <Text style={[styles.detailItem]}>
-              {location.street.number} {location.street.name}
+              {getFormattedAddress(location)}
             </Text>
             <Text style={[styles.detailItem]}>{phone}</Text>
           </View>
