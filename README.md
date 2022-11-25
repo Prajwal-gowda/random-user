@@ -1,3 +1,9 @@
+## Random User App
+
+App to display list of random users.
+
+Project uses [RandomUser](https://randomuser.me/) API to display a list of random users.
+
 ## Available Scripts
 
 In the project directory, you can run:
