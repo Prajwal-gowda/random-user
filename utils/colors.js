@@ -6,7 +6,7 @@ export const Colors = {
   primary500: "#1aacf0",
   primary700: "@0570c9",
   primary800: "#003b88",
-  accesnt500: "#e6b30b",
+  accent500: "#e6b30b",
   grey700: "#221c30",
   grey100: "#B2B2B2",
   secondary100: "#D2DAFF",
