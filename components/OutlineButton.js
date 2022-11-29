@@ -15,20 +15,20 @@ export default OutlineButton;
 
 const styles = StyleSheet.create({
   button: {
-    padding: 8,
-    margin: 8,
-    width: 150,
+    padding: 12,
+    margin: 24,
+    width: 175,
     justifyContent: "space-around",
     alignItems: "center",
     flexDirection: "row",
-    borderColor: Colors.primary500,
+    borderColor: Colors.primary,
     borderWidth: 2,
     borderRadius: 50,
     elevation: 4,
   },
 
   buttonText: {
-    color: Colors.primary500,
+    color: Colors.primary,
     fontSize: 16,
   },
 });

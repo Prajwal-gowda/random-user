@@ -1,9 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import { Colors } from "../utils/colors";
-import { getFormattedAddress, getFormattedName } from "../utils/utils";
+import { getFormattedName } from "../utils/utils";
+import { LinearGradient } from "expo-linear-gradient";
 
-const UserCard = ({ name, location, dob, phone, picture, login }) => {
+const UserCard = ({ name, picture, login }) => {
   const navigation = useNavigation();
 
   const userCardPressHandler = () => {
@@ -17,15 +18,16 @@ const UserCard = ({ name, location, dob, phone, picture, login }) => {
         style={({ pressed }) => pressed && styles.buttonPressed}
         onPress={userCardPressHandler}
       >
+        <LinearGradient
+          colors={[Colors.primary, Colors.secondary]}
+          style={styles.imageBackground}
+        />
         <View style={styles.InfoContainer}>
-          <Image style={styles.image} source={{ uri: picture.large }} />
+          <View style={styles.imageContainer}>
+            <Image style={styles.image} source={{ uri: picture.large }} />
+          </View>
           <View style={styles.details}>
             <Text style={styles.title}>{getFormattedName(name)}</Text>
-            <Text style={[styles.detailItem]}>{dob.age} yrs</Text>
-            <Text style={[styles.detailItem]}>
-              {getFormattedAddress(location)}
-            </Text>
-            <Text style={[styles.detailItem]}>{phone}</Text>
           </View>
         </View>
       </Pressable>
@@ -36,29 +38,50 @@ const UserCard = ({ name, location, dob, phone, picture, login }) => {
 export default UserCard;
 
 const styles = StyleSheet.create({
+  imageBackground: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 70,
+  },
+
   CardItem: {
-    margin: 16,
+    margin: 8,
+    flex: 1,
     borderRadius: 8,
-    backgroundColor: "white",
+    backgroundColor: Colors.primaryBackground,
     elevation: 4,
     shadowColor: "black",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
+    overflow: "hidden",
   },
 
   buttonPressed: {
     opacity: 0.5,
   },
 
+  imageContainer: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    overflow: "hidden",
+    marginTop: 8,
+    borderColor: "white",
+    borderWidth: 2,
+  },
+
   image: {
     height: "100%",
-    flex: 1.5,
   },
 
   InfoContainer: {
     borderRadius: 8,
     overflow: "hidden",
-    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 8,
   },
 
   title: {
@@ -70,14 +93,6 @@ const styles = StyleSheet.create({
 
   details: {
     margin: 16,
-    flex: 2,
     alignItems: "flex-start",
-  },
-
-  detailItem: {
-    marginVertical: 4,
-    fontSize: 14,
-    color: Colors.grey700,
-    fontWeight: "bold",
   },
 });

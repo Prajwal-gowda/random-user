@@ -8,6 +8,7 @@ import {
   getFormattedName,
   getSelectedUserData,
 } from "../utils/utils";
+import { LinearGradient } from "expo-linear-gradient";
 
 const UserDetail = ({ route, navigation }) => {
   const { users } = useContext(UsersContext);
@@ -35,6 +36,10 @@ const UserDetail = ({ route, navigation }) => {
     <ScrollView contentContainerStyle={styles.rootContainer}>
       {selectedUser && (
         <>
+          <LinearGradient
+            colors={[Colors.primary, Colors.secondary200]}
+            style={styles.imageBackground}
+          />
           <View style={styles.imageContainer}>
             <Image
               style={styles.image}
@@ -44,25 +49,26 @@ const UserDetail = ({ route, navigation }) => {
           <Text style={styles.title}>
             {getFormattedName(selectedUser.name)}
           </Text>
+
           <View style={styles.infoContainer}>
-            <Text style={styles.subTitle}>D.O.B : </Text>
+            <Text style={styles.subTitle}>Date Of Birth</Text>
             <Text style={styles.infoItem}>
               {getDateSubstring(selectedUser.dob.date)}
             </Text>
           </View>
 
           <View style={styles.infoContainer}>
-            <Text style={styles.subTitle}>Phone : </Text>
+            <Text style={styles.subTitle}>Phone</Text>
             <Text style={styles.infoItem}>{selectedUser.phone}</Text>
           </View>
 
           <View style={styles.infoContainer}>
-            <Text style={styles.subTitle}>Email : </Text>
+            <Text style={styles.subTitle}>Email</Text>
             <Text style={styles.infoItem}>{selectedUser.email}</Text>
           </View>
 
           <View style={styles.infoContainer}>
-            <Text style={styles.subTitle}>Address : </Text>
+            <Text style={styles.subTitle}>Address</Text>
             <Text style={styles.infoItem}>
               {selectedUser.location.street.number}{" "}
               {selectedUser.location.street.name}
@@ -73,7 +79,7 @@ const UserDetail = ({ route, navigation }) => {
             title="View Location"
             onPress={viewLocationHandler}
             icon="map"
-            color={Colors.primary500}
+            color={Colors.primary}
             size={16}
           />
         </>
@@ -91,11 +97,13 @@ const styles = StyleSheet.create({
   },
 
   imageContainer: {
-    width: 300,
-    height: 300,
-    borderRadius: 150,
+    width: 200,
+    height: 200,
+    borderRadius: 100,
     overflow: "hidden",
     marginVertical: 16,
+    borderColor: Colors.primaryBackground,
+    borderWidth: 2,
   },
 
   image: {
@@ -106,23 +114,34 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "white",
+    color: Colors.primaryBackground,
+    margin: 18,
   },
 
   infoContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-start",
-    maxWidth: 400,
+    justifyContent: "space-between",
     marginVertical: 4,
+    width: "90%",
     overflow: "hidden",
+    padding: 12,
+    borderBottomColor: Colors.primary,
+    borderBottomWidth: 2,
   },
   subTitle: {
     fontSize: 18,
-    color: Colors.primary500,
+    color: Colors.primary,
   },
   infoItem: {
     fontSize: 16,
-    color: Colors.grey100,
+    color: Colors.primaryBackground,
+  },
+  imageBackground: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: "40%",
   },
 });

@@ -9,6 +9,7 @@ const UserList = ({ userListInfo }) => {
       data={userListInfo}
       keyExtractor={(item) => `${item.id.value}-${item.registered.date}`}
       renderItem={renderUserCard}
+      numColumns={2}
     />
   );
 };
